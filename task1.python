@@ -1,0 +1,60 @@
+import random
+
+# List of predefined words
+words = ["python", "apple", "computer", "school", "keyboard"]
+
+# Select a random word
+word = random.choice(words)
+
+# Variables
+guessed_letters = []
+wrong_guesses = 0
+max_wrong_guesses = 6
+
+# Display hidden word
+hidden_word = "_" * len(word)
+
+print("Welcome to Hangman Game!")
+print("Guess the word one letter at a time.")
+
+# Game loop
+while wrong_guesses < max_wrong_guesses and hidden_word != word:
+
+    print("\nWord:", " ".join(hidden_word))
+    print("Wrong guesses left:", max_wrong_guesses - wrong_guesses)
+
+    # Take user input
+    guess = input("Enter a letter: ").lower()
+
+    # Check if already guessed
+    if guess in guessed_letters:
+        print("You already guessed that letter!")
+        continue
+
+    guessed_letters.append(guess)
+
+    # Correct guess
+    if guess in word:
+        print("Correct guess!")
+
+        # Update hidden word
+        new_hidden = ""
+
+        for letter in word:
+            if letter in guessed_letters:
+                new_hidden += letter
+            else:
+                new_hidden += "_"
+
+        hidden_word = new_hidden
+
+    # Wrong guess
+    else:
+        print("Wrong guess!")
+        wrong_guesses += 1
+
+# Result
+if hidden_word == word:
+    print("\nCongratulations! You guessed the word:", word)
+else:
+    print("\nGame Over! The word was:", word)
