@@ -1,0 +1,3 @@
+Stock: GOOGLE
+Quantity: 20
+Total Value: 3000
